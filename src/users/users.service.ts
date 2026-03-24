@@ -24,6 +24,10 @@ export class UsersService {
     return this.userModel.findOne({ email }).exec();
   }
 
+  async findById(userId: string): Promise<UserDocument | null> {
+    return this.userModel.findById(userId).exec();
+  }
+
   async linkRiotAccount(
     userId: string,
     riotData: RiotAccount,
