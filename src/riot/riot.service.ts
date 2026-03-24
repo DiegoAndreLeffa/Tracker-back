@@ -48,4 +48,39 @@ export class RiotService {
       );
     }
   }
+
+  // 3. Busca a lista de IDs de partidas de um jogador
+  async getMatchIdsByPuuid(puuid: string, start = 0, count = 5) {
+    try {
+      // Nota: A API de matches fica nos servidores regionais (americas, europe, asia)
+      const url = `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=${start}&count=${count}`;
+
+      const response = await firstValueFrom(
+        this.httpService.get(url, { headers: { 'X-Riot-Token': this.apiKey } }),
+      );
+      return response.data; // Retorna um array de strings: ['BR1_123', 'BR1_456']
+    } catch (error) {
+      throw new HttpException(
+        'Erro ao buscar histórico de partidas',
+        HttpStatus.BAD_GATEWAY,
+      );
+    }
+  }
+
+  // 4. Busca os dados completos de UMA partida específica
+  async getMatchDetails(matchId: string) {
+    try {
+      const url = `https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+
+      const response = await firstValueFrom(
+        this.httpService.get(url, { headers: { 'X-Riot-Token': this.apiKey } }),
+      );
+      return response.data; // Retorna o JSON gigante da partida
+    } catch (error) {
+      throw new HttpException(
+        `Erro ao buscar detalhes da partida ${matchId}`,
+        HttpStatus.BAD_GATEWAY,
+      );
+    }
+  }
 }

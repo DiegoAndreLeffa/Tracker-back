@@ -9,5 +9,6 @@ import { RiotService } from './riot.service';
   imports: [HttpModule, UsersModule],
   controllers: [RiotController],
   providers: [RiotService],
+  exports: [RiotService],
 })
 export class RiotModule {}
