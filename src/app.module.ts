@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { RiotModule } from './riot/riot.module';
 import { MatchesModule } from './matches/matches.module';
 import { AnalyzerModule } from './analyzer/analyzer.module';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AnalyzerModule } from './analyzer/analyzer.module';
     RiotModule,
     MatchesModule,
     AnalyzerModule,
+    AiModule,
   ],
 })
 export class AppModule {}

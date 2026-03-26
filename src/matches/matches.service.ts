@@ -60,4 +60,9 @@ export class MatchesService {
       newMatchesAdded: addedCount,
     };
   }
+
+  // Busca uma partida salva no nosso banco pelo matchId
+  async findByMatchId(matchId: string): Promise<MatchDocument | null> {
+    return this.matchModel.findOne({ matchId }).exec();
+  }
 }
